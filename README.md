@@ -53,8 +53,8 @@ Status: Resolved
 - Containment using Azure native controls  
 - Clear security event documentation
 
-📌 About This Project
-I used Grok to help structure, refine, and professionalize the reporting and README. I believe using AI tools to improve documentation and incident reporting is an important modern SOC skill.
+📌 About This Project:
+- I used Grok to help structure, refine, and professionalize the reporting and README. I believe using AI tools to improve documentation and incident reporting is an important modern SOC skill.
 
 Author: Mohamed Khaled Mohamed Zein
 Date: April 04, 2026
