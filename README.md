@@ -17,25 +17,25 @@ I simulated a real SSH brute-force attack against an Azure Linux VM and handled 
 ### 📸 Project Walkthrough
 
 **1. Environment & Defender Setup**
-![Defender for Cloud Setup](screenshots/01-defender-cloud-setup.png)
-![VM Creation](screenshots/02-vm-creation.png)
-![Defender Plan 2 Enabled](screenshots/03-defender-plan2-enabled.png)
+![Defender for Cloud Setup](01-defender-cloud-setup.png)
+![VM Creation](02-vm-creation.png)
+![Defender Plan 2 Enabled](03-defender-plan2-enabled.png)
 
 **2. Attack Execution**
-![Hydra Brute-Force Attack](screenshots/04-hydra-attack.png)
+![Hydra Brute-Force Attack](04-hydra-attack.png)
 
 **3. Incident Detection & Management in Sentinel**
-![Sentinel Alert](screenshots/05-sentinel-alert.png)
+![Sentinel Alert](05-sentinel-alert.png)
 
 **4. Incident Investigation – Attack Story Graph**
-![Attack Story Graph](screenshots/06-attack-story-graph.png)
+![Attack Story Graph](06-attack-story-graph.png)
 
 **5. Containment & Evidence Collection**
-![Auth Log Analysis](screenshots/07-auth-log.png)
-![NSG Block Rule](screenshots/08-nsg-block.png)
+![Auth Log Analysis](07-auth-log.png)
+![NSG Block Rule](08-nsg-block.png)
 
 **6. Incident Closure in Sentinel**
-![Incident Resolved](screenshots/09-incident-closed.png)
+![Incident Resolved](09-incident-closed.png)
 
 📄 Incident Summary (Managed in Sentinel)
 Attack Source: TryHackMe Kali Linux (IP: 13.38.170.39)
