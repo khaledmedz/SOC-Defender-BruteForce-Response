@@ -37,3 +37,26 @@ I simulated a real SSH brute-force attack against an Azure Linux VM and handled 
 **6. Incident Closure in Sentinel**
 ![Incident Resolved](screenshots/09-incident-closed.png)
 
+📄 Incident Summary (Managed in Sentinel)
+Attack Source: TryHackMe Kali Linux (IP: 13.38.170.39)
+Alert: "Unusual number of failed sign-in attempts"
+Techniques: T1110 (Brute Force) + T1078 (Valid Accounts)
+Investigation: Reviewed Attack Story Graph, checked /var/log/auth.log, confirmed 337 failed attempts
+Containment: Created NSG rule to block attacker IP
+Classification: True Positive – Controlled security test
+Status: Resolved
+
+✅ Skills Demonstrated
+
+Activation and configuration of Defender for Servers Plan 2
+Real-time threat detection
+Full incident management in Microsoft Sentinel (triage, correlation, Attack Story Graph, resolution)
+Containment using Azure native controls
+Clear security event documentation
+
+📌 About This Project
+I used Grok to help structure, refine, and professionalize the reporting and README. I believe using AI tools to improve documentation and incident reporting is an important modern SOC skill.
+
+Author: Mohamed Khaled Mohamed Zein
+Date: April 04, 2026
+
