@@ -46,13 +46,12 @@ Containment: Created NSG rule to block attacker IP
 Classification: True Positive – Controlled security test
 Status: Resolved
 
-✅ Skills Demonstrated
-
-Activation and configuration of Defender for Servers Plan 2
-Real-time threat detection
-Full incident management in Microsoft Sentinel (triage, correlation, Attack Story Graph, resolution)
-Containment using Azure native controls
-Clear security event documentation
+### ✅ Skills Demonstrated
+- Activation and configuration of Defender for Servers Plan 2  
+- Real-time threat detection  
+- Full incident management in Microsoft Sentinel (triage, correlation, Attack Story Graph, resolution)  
+- Containment using Azure native controls  
+- Clear security event documentation
 
 📌 About This Project
 I used Grok to help structure, refine, and professionalize the reporting and README. I believe using AI tools to improve documentation and incident reporting is an important modern SOC skill.
