@@ -1,61 +1,106 @@
-# Defender Brute-Force Response Project
+# Brute-Force-Detection-and-Containment-Using-Sentinel and Defender
 
-**Microsoft Defender for Servers P2 + Microsoft Sentinel**  
-**April 2026**
+---
 
-### 🎯 Project Goal
-I simulated a real SSH brute-force attack against an Azure Linux VM and handled the complete incident response using Microsoft Defender for Servers and Sentinel, with a strong focus on incident management in Sentinel.
+## 🎯 Project Objective
 
-### 🛠️ What I Did
-- Enabled **Defender for Servers Plan 2** in my Azure subscription  
-- Deployed a Linux VM (`SOC-VM1`)  
-- Executed a controlled brute-force attack using Hydra from my TryHackMe Kali Linux machine  
-- Detected the attack in real time  
-- Fully managed the incident inside **Microsoft Sentinel** (triage, investigation, containment, and closure)  
-- Blocked the attacker IP using a Network Security Group rule  
+Simulated a realistic SSH brute-force attack against an Azure Linux VM and executed the full incident response lifecycle using **Microsoft Defender for Servers Plan 2** and **Microsoft Sentinel**. The goal was to demonstrate practical SOC skills in detection, investigation, containment, and response in a cloud environment.
 
-### 📸 Project Walkthrough
+---
 
-**1. Environment & Defender Setup**
-![Defender for Cloud Setup](01-defender-cloud-setup.png)
-![VM Creation](02-vm-creation.png)
-![Defender Plan 2 Enabled](03-defender-plan2-enabled.png)
+## 🛠️ Tools Used
+- Microsoft Defender for Servers Plan 2
+- Microsoft Sentinel (SIEM)
+- Azure Activity Logs + KQL
+- Azure Network Security Groups (NSG)
+- Advanced Hunting
+- **Claude (Anthropic)** – Used for report structuring, professional writing, and layout optimization
 
-**2. Attack Execution**
-![Hydra Brute-Force Attack](04-hydra-attack.png)
+---
 
-**3. Incident Detection & Management in Sentinel**
-![Sentinel Alert](05-sentinel-alert.png)
+## 🏗️ Lab Environment
+- **Cloud:** Microsoft Azure
+- **VM:** Ubuntu 22.04 LTS — Standard B1s
+- **SIEM:** Microsoft Sentinel (Log Analytics Workspace)
+- **Attack Machine:** Hydra on local Kali Linux
+- **Defender Plan:** Microsoft Defender for Servers Plan 2
 
-**4. Incident Investigation – Attack Story Graph**
-![Attack Story Graph](06-attack-story-graph.png)
+---
 
-**5. Containment & Evidence Collection**
-![Auth Log Analysis](07-auth-log.png)
-![NSG Block Rule](08-nsg-block.png)
+## Skills Demonstrated
+- Defender for Servers configuration and monitoring
+- Real-time threat detection using KQL queries
+- Incident investigation using Attack Story Graph
+- Automated and manual containment actions
+- Custom detection and response workflows
+- Professional incident documentation and reporting with AI assistance
 
-**6. Incident Closure in Sentinel**
-![Incident Resolved](09-incident-closed.png)
+---
 
-📄 Incident Summary (Managed in Sentinel)
-Attack Source: TryHackMe Kali Linux (IP: 13.38.170.39)
-Alert: "Unusual number of failed sign-in attempts"
-Techniques: T1110 (Brute Force) + T1078 (Valid Accounts)
-Investigation: Reviewed Attack Story Graph, checked /var/log/auth.log, confirmed 337 failed attempts
-Containment: Created NSG rule to block attacker IP
-Classification: True Positive – Controlled security test
-Status: Resolved
+## Project Walkthrough
 
-### ✅ Skills Demonstrated
-- Activation and configuration of Defender for Servers Plan 2  
-- Real-time threat detection  
-- Full incident management in Microsoft Sentinel (triage, correlation, Attack Story Graph, resolution)  
-- Containment using Azure native controls  
-- Clear security event documentation
+### 1. Defender for Servers Plan 2 Setup
+Enabled Microsoft Defender for Servers Plan 2 on the target Linux VM, connecting it to the Log Analytics workspace. This activates Defender's agentless scanning, file integrity monitoring, and security alert forwarding to Microsoft Sentinel — generating the SecurityAlert and SecurityEvent tables used for detection.
 
-📌 About This Project:
-- I used Grok to help structure, refine, and professionalize the reporting and README. I believe using AI tools to improve documentation and incident reporting is an important modern SOC skill.
+![Defender for Servers Plan 2 Enabled](Screenshots/1-defender-plan2-enabled.png)
 
-Author: Mohamed Khaled Mohamed Zein
-Date: April 04, 2026
+### 2. Target VM Creation
+Created the target Azure Linux VM and monitored its creation using KQL query in the `AzureActivity` table to track control-plane changes.
 
+![KQL Query - Linux VM Creation](Screenshots/2-Linux-Vm-creation-kql.png)
+
+### 3. Brute Force Attack Simulation
+Executed a controlled SSH brute-force attack using Hydra from a Kali Linux environment.
+
+![Brute Force Attack Execution](Screenshots/3-brute-force-attack.png)
+
+### 4. Detection in Microsoft Sentinel
+Microsoft Defender for Servers triggered an alert. Used a custom KQL query to hunt and confirm the latest security alerts.
+
+![KQL Query - Sentinel Alert Hunting](Screenshots/4-sentinel-alert-kql.png)
+
+### 5. Investigation - Attack Story
+Analyzed the full attack chain using the Attack Story Graph in Sentinel.
+
+![Attack Story Graph Analysis](Screenshots/5-attack-story-graph.png)
+
+### 6. VM Authentication Logs Review
+Reviewed detailed authentication logs to understand the brute-force pattern and confirm the scale of the attack.
+
+![VM Authentication Logs](Screenshots/6-VM-authentication-logs.png)
+
+### 7. Containment Action
+Blocked the attacker IP by creating a Network Security Group (NSG) rule. Verified the action using KQL against the `AzureActivity` table.
+
+![KQL Query - NSG Rule Creation for IP Blocking](Screenshots/7-IP-block-with-NSG-rule-kql.png)
+
+### 8. Incident Resolution
+Successfully resolved the incident with final comments and documentation.
+
+![Incident Resolved](Screenshots/8-incident-resolved-with-Final-comment.png)
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic                  | Technique ID       | Technique Name                          | Description |
+|-------------------------|--------------------|-----------------------------------------|-------------|
+| Reconnaissance          | T1595.002         | Active Scanning: Vulnerability Scanning | External scanning of exposed SSH port |
+| Credential Access       | T1110.003         | Brute Force: Password Spraying          | SSH brute-force attack using Hydra |
+| Defense Evasion         | T1562.001         | Impair Defenses                         | Attempt to bypass monitoring |
+| Command & Control       | T1071            | Application Layer Protocol              | Potential C2 if successful |
+
+---
+
+## Lessons Learned
+- Internet-facing Linux VMs generate brute-force attempts within minutes of creation. This lab VM received real SSH attempts from external IPs before Hydra even ran, confirming that default-open port 22 is actively scanned in the wild.
+- NSG rules restricting SSH to known IPs should be default, not optional.
+- Combining Defender for Servers with Sentinel provides excellent visibility and automated response capabilities.
+- **AI Integration (Claude)**: Used Claude to help structure reports, improve technical writing, and optimize layout — demonstrating modern SOC practices where AI assists analysts in producing high-quality, professional documentation efficiently.
+
+---
+
+**Author:** Mohamed Khaled Mohamed Zein  
+**Date:** April 2026  
+
+---
